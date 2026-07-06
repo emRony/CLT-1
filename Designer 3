@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Noyer — Design mobilier sur mesure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --linen:#E8E2D4;
+    --linen-2:#DED6C4;
+    --ivoire:#FAF7F0;
+    --ebene:#2A2119;
+    --taupe:#7D7362;
+    --cuivre:#A6552B;
+    --cuivre-vif:#C36A3A;
+    --laiton:#B99230;
+    --noyer-dark:#332318;
+    --noyer-dark-2:#2A1D14;
+    --line:rgba(42,33,25,0.16);
+    --line-dark:rgba(250,247,240,0.18);
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--linen);
+    color:var(--ebene);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+    html{scroll-behavior:auto;}
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--cuivre);
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    color:var(--ebene);
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  :focus-visible{outline:2px solid var(--cuivre); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(232,226,212,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:background .3s ease;
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;
+    max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--cuivre);}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{
+    font-size:13px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    font-family:'Space Mono',monospace;
+    position:relative;
+    padding-bottom:4px;
+    color:var(--ebene);
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--cuivre);transition:width .25s ease;
+  }
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+  .nav-cta{
+    font-family:'Space Mono',monospace;
+    font-size:12px;letter-spacing:0.04em;text-transform:uppercase;
+    border:1px solid var(--ebene);
+    padding:9px 18px;
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{background:var(--ebene);color:var(--ivoire);}
+  .burger{display:none;flex-direction:column;gap:5px;width:26px;}
+  .burger span{height:1px;background:var(--ebene);width:100%;}
+  .mobile-menu{
+    display:none;flex-direction:column;gap:0;
+    background:var(--ivoire);border-top:1px solid var(--line);
+  }
+  .mobile-menu a{
+    padding:16px 32px;border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.03em;
+  }
+  @media (max-width:860px){
+    .nav-links,.nav-cta{display:none;}
+    .burger{display:flex;}
+    .mobile-menu.open{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:168px 0 96px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px,4.6vw,58px);
+    line-height:1.06;
+    margin:18px 0 26px;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--cuivre);
+  }
+  .hero p.lead{
+    font-size:17px;color:var(--taupe);max-width:440px;margin-bottom:34px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;
+    padding:14px 24px;
+    transition:all .25s ease;
+  }
+  .btn-solid{background:var(--ebene);color:var(--ivoire);}
+  .btn-solid:hover{background:var(--cuivre);}
+  .btn-ghost{border:1px solid var(--ebene);}
+  .btn-ghost:hover{border-color:var(--cuivre);color:var(--cuivre);}
+
+  .hero-art{position:relative;}
+  .hero-art svg{width:100%;height:auto;}
+  .callout{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.02em;
+    fill:var(--taupe);
+  }
+  .callout-line{stroke:var(--taupe);stroke-width:1;stroke-dasharray:2 3;}
+  .draw-line{stroke:var(--ebene);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .draw-accent{stroke:var(--cuivre);stroke-width:1.4;fill:none;}
+  .hotspot{cursor:pointer;}
+  .hotspot circle{fill:var(--linen);stroke:var(--cuivre);stroke-width:1.4;}
+  .hotspot text{font-family:'Space Mono',monospace;font-size:9px;fill:var(--cuivre);font-weight:700;}
+  .hs-label{
+    font-family:'Space Mono',monospace;font-size:10px;fill:var(--ebene);
+    opacity:0;transition:opacity .2s ease;
+  }
+  .hotspot:hover .hs-label,.hotspot:focus .hs-label{opacity:1;}
+  .hotspot:hover circle,.hotspot:focus circle{fill:var(--cuivre);}
+
+  section{padding:104px 0;position:relative;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+    margin-bottom:56px;flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);margin-top:12px;}
+  .section-head p{color:var(--taupe);max-width:360px;font-size:15px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .manifesto-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+  .manifesto blockquote{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:450;
+    font-size:clamp(22px,2.6vw,30px);line-height:1.35;color:var(--ebene);
+  }
+  .manifesto-body p{color:var(--taupe);font-size:15.5px;margin-bottom:16px;max-width:480px;}
+  .manifesto-body p:last-child{margin-bottom:0;}
+
+  /* ---------- COLLECTION ---------- */
+  .filters{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
+  .filter-btn{
+    font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;
+    padding:9px 16px;border:1px solid var(--line);color:var(--taupe);
+    transition:all .2s ease;
+  }
+  .filter-btn.active,.filter-btn:hover{border-color:var(--ebene);color:var(--ebene);background:var(--ivoire);}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+  .piece{
+    background:var(--ivoire);padding:32px 28px 28px;
+    display:flex;flex-direction:column;gap:18px;
+    transition:background .3s ease;
+  }
+  .piece.hidden{display:none;}
+  .piece:hover{background:var(--linen-2);}
+  .piece-ref{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--cuivre);letter-spacing:.04em;}
+  .piece-icon{height:120px;display:flex;align-items:center;justify-content:center;}
+  .piece-icon svg{width:100%;height:100%;stroke:var(--ebene);}
+  .piece h3{font-size:19px;font-weight:450;}
+  .piece-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--taupe);border-top:1px solid var(--line);padding-top:14px;}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr;}}
+
+  /* ---------- SAVOIR-FAIRE (dark band) ---------- */
+  .savoir{
+    background:var(--noyer-dark);
+    color:var(--ivoire);
+  }
+  .savoir .eyebrow{color:var(--laiton);}
+  .savoir h2{color:var(--ivoire);}
+  .savoir .section-head p{color:rgba(250,247,240,0.62);}
+  .stages{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--line-dark);
+  }
+  .stage{
+    padding:36px 26px 0;border-right:1px solid var(--line-dark);position:relative;
+  }
+  .stage:last-child{border-right:none;}
+  .stage-num{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--laiton);
+    display:block;margin-bottom:22px;
+  }
+  .stage h3{color:var(--ivoire);font-size:19px;margin-bottom:10px;font-weight:450;}
+  .stage p{font-size:14px;color:rgba(250,247,240,0.6);padding-bottom:36px;}
+  @media (max-width:900px){
+    .stages{grid-template-columns:1fr 1fr;}
+    .stage{border-bottom:1px solid var(--line-dark);}
+  }
+  @media (max-width:560px){.stages{grid-template-columns:1fr;}}
+
+  /* ---------- MATERIAUX ---------- */
+  .materials{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
+  .swatch{
+    aspect-ratio:1/1.15;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:flex-end;padding:16px;
+  }
+  .swatch span{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.02em;
+    position:relative;z-index:2;
+  }
+  .swatch small{display:block;font-size:9.5px;opacity:.75;margin-top:3px;}
+  .swatch::before{content:'';position:absolute;inset:0;opacity:.9;}
+  .sw-noyer::before{background:linear-gradient(160deg,#4a3120,#2d1d12);}
+  .sw-chene::before{background:linear-gradient(160deg,#c9a06a,#a17944);}
+  .sw-hetre::before{background:linear-gradient(160deg,#e6cfa6,#cba876);}
+  .sw-laiton::before{background:linear-gradient(160deg,#d4af37,#8f7020);}
+  .sw-lin::before{background:linear-gradient(160deg,#e9e2d1,#c9bfa4);}
+  .swatch span{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);}
+  .sw-hetre span,.sw-lin span{color:#2A2119;text-shadow:none;}
+  @media (max-width:820px){.materials{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:520px){.materials{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- SUR-MESURE ---------- */
+  .commande{
+    border-top:1px solid var(--line);
+  }
+  .commande-inner{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  }
+  .commande-steps{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:28px;}
+  .commande-steps li{display:flex;gap:14px;font-size:14.5px;color:var(--taupe);align-items:baseline;}
+  .commande-steps b{color:var(--ebene);font-weight:500;min-width:96px;font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
+  .commande-card{
+    background:var(--ivoire);border:1px solid var(--line);padding:40px;
+  }
+  .commande-card .eyebrow{margin-bottom:14px;display:block;}
+  .commande-card p{color:var(--taupe);font-size:14.5px;margin-bottom:28px;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    background:var(--noyer-dark-2);color:var(--ivoire);padding:80px 0 32px;
+  }
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+  footer .logo{color:var(--ivoire);font-size:22px;margin-bottom:16px;display:block;}
+  footer .logo span{color:var(--laiton);}
+  footer p{color:rgba(250,247,240,.55);font-size:14px;max-width:320px;}
+  .footer-col h4{
+    font-family:'Space Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--laiton);margin-bottom:18px;
+  }
+  .footer-col a,.footer-col li{
+    display:block;font-size:14px;color:rgba(250,247,240,.75);margin-bottom:10px;
+  }
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid var(--line-dark);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:'Space Mono',monospace;font-size:11px;color:rgba(250,247,240,.45);
+    text-transform:uppercase;letter-spacing:.03em;
+  }
+  @media (max-width:760px){
+    .hero-grid,.manifesto-grid,.commande-inner{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="logo">Atelier<span>Noyer</span></a>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#savoir-faire">Savoir-faire</a></li>
+      <li><a href="#materiaux">Matériaux</a></li>
+      <li><a href="#sur-mesure">Sur-mesure</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Prendre contact</a>
+    <button class="burger" aria-label="Ouvrir le menu" id="burgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#collection">Collection</a>
+    <a href="#savoir-faire">Savoir-faire</a>
+    <a href="#materiaux">Matériaux</a>
+    <a href="#sur-mesure">Sur-mesure</a>
+    <a href="#contact">Prendre contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Atelier de design mobilier — Basé à Lyon</span>
+        <h1>Chaque meuble se dessine<br>avant de se couper<em>.</em></h1>
+        <p class="lead">Léa Fontaine conçoit et fabrique des pièces en bois massif, dessinées sur mesure et assemblées à la main, pièce par pièce, dans l'atelier.</p>
+        <div class="hero-actions">
+          <a href="#collection" class="btn btn-solid">Voir la collection</a>
+          <a href="#sur-mesure" class="btn btn-ghost">Lancer un projet</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <svg viewBox="0 0 480 460" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dessin technique annoté d'une chaise">
+          <!-- backrest slats -->
+          <path class="draw-line" d="M170 70 L170 170 M195 60 L195 170 M220 55 L220 170 M245 60 L245 170 M270 70 L270 170" />
+          <path class="draw-accent" d="M160 170 Q220 185 280 170" />
+          <!-- seat -->
+          <path class="draw-line" d="M150 170 L290 170 L300 210 L140 210 Z" />
+          <!-- legs -->
+          <path class="draw-line" d="M148 208 L120 400 M292 208 L322 400 M175 210 L162 395 M262 210 L278 395" />
+          <!-- stretchers -->
+          <path class="draw-line" d="M128 330 L316 330" />
+          <!-- leader lines + hotspots -->
+          <line class="callout-line" x1="220" y1="60" x2="360" y2="40"/>
+          <g class="hotspot" tabindex="0">
+            <circle cx="360" cy="40" r="7"/>
+            <text x="356" y="44" text-anchor="middle">1</text>
+            <text class="hs-label" x="374" y="44">Dossier cintré à la vapeur</text>
+          </g>
+
+          <line class="callout-line" x1="290" y1="190" x2="400" y2="200"/>
+          <g class="hotspot" tabindex="0">
+            <circle cx="400" cy="200" r="7"/>
+            <text x="396" y="204" text-anchor="middle">2</text>
+            <text class="hs-label" x="414" y="204">Assise chêne massif — 32 mm</text>
+          </g>
+
+          <line class="callout-line" x1="278" y1="330" x2="400" y2="345"/>
+          <g class="hotspot" tabindex="0">
+            <circle cx="400" cy="345" r="7"/>
+            <text x="396" y="349" text-anchor="middle">3</text>
+            <text class="hs-label" x="414" y="349">Assemblage tenon-mortaise</text>
+          </g>
+
+          <line class="callout-line" x1="162" y1="360" x2="60" y2="380"/>
+          <g class="hotspot" tabindex="0">
+            <circle cx="60" cy="380" r="7"/>
+            <text x="56" y="384" text-anchor="middle">4</text>
+            <text class="hs-label" x="18" y="404" text-anchor="start">Piètement fuselé hêtre</text>
+          </g>
+
+          <text class="callout" x="20" y="440">RÉF. AN-014 — Chaise « Vallée »</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto reveal">
+    <div class="wrap manifesto-grid">
+      <blockquote>« Un meuble bien construit se répare. Un meuble bien dessiné se transmet. »</blockquote>
+      <div class="manifesto-body">
+        <p>L'atelier fabrique un nombre volontairement restreint de pièces chaque année. Chaque commande commence par un dessin à l'échelle, discuté avec vous, puis un choix de bois massif adapté à l'usage réel du meuble — pas seulement à son apparence.</p>
+        <p>Aucun panneau composite, aucune quincaillerie invisible : les assemblages traditionnels — tenon-mortaise, queue d'aronde, chevillage — restent visibles ou devinables, parce qu'ils font partie du dessin.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section id="collection">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Collection</span>
+          <h2>Pièces en atelier & sur commande</h2>
+        </div>
+        <p>Une sélection de pièces déjà dessinées, disponibles en série limitée ou comme point de départ pour une adaptation sur mesure.</p>
+      </div>
+
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">Tout voir</button>
+        <button class="filter-btn" data-filter="assise">Assises</button>
+        <button class="filter-btn" data-filter="table">Tables</button>
+        <button class="filter-btn" data-filter="rangement">Rangements</button>
+      </div>
+
+      <div class="grid reveal">
+        <div class="piece" data-cat="assise">
+          <span class="piece-ref">RÉF. AN-014</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><path d="M25 30 L25 55 L75 55 L75 30 M20 55 L20 85 M80 55 L80 85 M30 55 L28 82 M70 55 L72 82 M22 20 L22 55 M78 20 L78 55"/></svg></div>
+          <h3>Chaise « Vallée »</h3>
+          <p class="piece-meta"><span>Chêne massif</span><span>Pièce unique</span></p>
+        </div>
+        <div class="piece" data-cat="table">
+          <span class="piece-ref">RÉF. AN-021</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><path d="M10 35 L90 35 L90 42 L10 42 Z M20 42 L20 85 M80 42 L80 85 M20 65 L80 65"/></svg></div>
+          <h3>Table « Bief »</h3>
+          <p class="piece-meta"><span>Noyer massif</span><span>Sur commande</span></p>
+        </div>
+        <div class="piece" data-cat="rangement">
+          <span class="piece-ref">RÉF. AN-009</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><rect x="18" y="15" width="64" height="70"/><path d="M18 38 L82 38 M18 61 L82 61 M50 15 L50 85"/></svg></div>
+          <h3>Bibliothèque « Rive »</h3>
+          <p class="piece-meta"><span>Chêne & laiton</span><span>Série limitée · 8</span></p>
+        </div>
+        <div class="piece" data-cat="assise">
+          <span class="piece-ref">RÉF. AN-017</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><path d="M15 55 L85 55 L85 65 L15 65 Z M20 65 L20 88 M80 65 L80 88 M50 55 L50 25 Q50 15 62 15"/></svg></div>
+          <h3>Banc « Digue »</h3>
+          <p class="piece-icon"></p>
+          <p class="piece-meta"><span>Hêtre massif</span><span>Pièce unique</span></p>
+        </div>
+        <div class="piece" data-cat="table">
+          <span class="piece-ref">RÉF. AN-026</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><ellipse cx="50" cy="40" rx="38" ry="14"/><path d="M50 54 L50 85 M30 85 L70 85"/></svg></div>
+          <h3>Guéridon « Anse »</h3>
+          <p class="piece-meta"><span>Noyer & laiton</span><span>Sur commande</span></p>
+        </div>
+        <div class="piece" data-cat="rangement">
+          <span class="piece-ref">RÉF. AN-011</span>
+          <div class="piece-icon"><svg viewBox="0 0 100 100" fill="none" stroke-width="2"><rect x="15" y="30" width="70" height="45"/><path d="M15 75 L10 85 M85 75 L90 85 M50 30 L50 75"/></svg></div>
+          <h3>Buffet « Estran »</h3>
+          <p class="piece-meta"><span>Chêne massif</span><span>Série limitée · 5</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVOIR-FAIRE -->
+  <section id="savoir-faire" class="savoir">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Savoir-faire</span>
+          <h2>De l'esquisse à la livraison</h2>
+        </div>
+        <p>Quatre étapes, toujours dans le même ordre, pour que le dessin tienne encore dans vingt ans.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stages reveal">
+        <div class="stage">
+          <span class="stage-num">01 — Le dessin</span>
+          <h3>Prise de mesures et croquis</h3>
+          <p>Rendez-vous chez vous ou à l'atelier pour relever les contraintes réelles, puis premier dessin à l'échelle discuté ensemble.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">02 — Le bois</span>
+          <h3>Sélection des planches</h3>
+          <p>Choix des planches une à une chez le scieur, en fonction du fil du bois et de l'usage prévu de la pièce.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">03 — L'assemblage</span>
+          <h3>Coupe et assemblage manuel</h3>
+          <p>Débit, ajustage et assemblage à la main : tenons, mortaises et chevilles, sans visserie apparente.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">04 — La finition</span>
+          <h3>Huile et cire naturelles</h3>
+          <p>Ponçage progressif puis finition à l'huile dure ou à la cire d'abeille, sans vernis ni résine synthétique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIAUX -->
+  <section id="materiaux">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Matériaux</span>
+          <h2>Une palette de bois et de métal</h2>
+        </div>
+        <p>Cinq matières qui reviennent d'une pièce à l'autre, choisies pour leur tenue dans le temps.</p>
+      </div>
+    </div>
+    <div class="materials reveal">
+      <div class="swatch sw-noyer"><span>Noyer<small>Piètements, plateaux</small></span></div>
+      <div class="swatch sw-chene"><span>Chêne<small>Structures, assises</small></span></div>
+      <div class="swatch sw-hetre"><span>Hêtre<small>Pièces cintrées</small></span></div>
+      <div class="swatch sw-laiton"><span>Laiton<small>Poignées, inserts</small></span></div>
+      <div class="swatch sw-lin"><span>Lin<small>Garnitures, assises</small></span></div>
+    </div>
+  </section>
+
+  <!-- SUR MESURE -->
+  <section id="sur-mesure" class="commande">
+    <div class="wrap commande-inner">
+      <div class="reveal">
+        <span class="eyebrow">Sur-mesure</span>
+        <h2>Un meuble pensé pour votre espace</h2>
+        <ul class="commande-steps">
+          <li><b>Étape 1</b> Échange sur l'usage, l'espace et le budget.</li>
+          <li><b>Étape 2</b> Dessin et devis détaillé sous une semaine.</li>
+          <li><b>Étape 3</b> Fabrication en atelier, 6 à 10 semaines.</li>
+          <li><b>Étape 4</b> Livraison et installation sur place.</li>
+        </ul>
+      </div>
+      <div class="commande-card reveal">
+        <span class="eyebrow">Délai actuel</span>
+        <p>L'atelier prend actuellement des commandes pour une livraison à partir de septembre. Chaque projet démarre par un échange, sans engagement.</p>
+        <a href="#contact" class="btn btn-solid">Décrire mon projet</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="logo">Atelier<span>Noyer</span></span>
+        <p>Design et fabrication de mobilier sur mesure en bois massif. Atelier ouvert sur rendez-vous.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Atelier</h4>
+        <span>12 rue des Tanneurs</span>
+        <span>69005 Lyon</span>
+        <span>Mar–Sam, 9h–18h</span>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:bonjour@atelier-noyer.fr">bonjour@atelier-noyer.fr</a>
+        <a href="tel:+33400000000">+33 4 00 00 00 00</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Atelier Noyer</span>
+      <span>Fabriqué à Lyon</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Filtres collection
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const pieces = document.querySelectorAll('.piece');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      pieces.forEach(p => {
+        p.classList.toggle('hidden', cat !== 'all' && p.dataset.cat !== cat);
+      });
+    });
+  });
+
+  // Lien de nav actif au scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const setActive = () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 120 && rect.bottom >= 120) current = sec.id;
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  document.addEventListener('scroll', setActive, {passive:true});
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
