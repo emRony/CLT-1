@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noé Duval — Designer de mobilier</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  :root{
+    --nd-bg: #1B1714;
+    --nd-bg-soft: #232019;
+    --nd-paper: #EFE7D8;
+    --nd-paper-dim: #E4DAC5;
+    --nd-ink: #211D1A;
+    --nd-brass: #B08D46;
+    --nd-brass-bright: #C9A25E;
+    --nd-rust: #8C5A3C;
+    --nd-muted: #A69C8D;
+    --nd-line: rgba(239,231,216,0.18);
+  }
+  *{box-sizing:border-box;}
+  body{
+    background: var(--nd-bg);
+    color: var(--nd-paper);
+    font-family:'Work Sans', sans-serif;
+  }
+  .nd-display{ font-family:'Fraunces', serif; }
+  .nd-mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.04em; }
+
+  .nd-grain{
+    background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .nd-paper-panel{
+    background-color: var(--nd-paper);
+    color: var(--nd-ink);
+  }
+
+  .nd-pin{ fill: var(--nd-brass); }
+  .nd-line-art{ stroke: var(--nd-ink); fill:none; }
+  .nd-dim{ stroke: var(--nd-rust); fill:none; }
+  .nd-dim-text{ fill: var(--nd-rust); }
+
+  .nd-crop::before, .nd-crop::after{
+    content:"";
+    position:absolute;
+    width:18px; height:18px;
+    border-color: var(--nd-brass);
+  }
+  .nd-crop::before{ top:0; left:0; border-top:1px solid; border-left:1px solid; }
+  .nd-crop::after{ bottom:0; right:0; border-bottom:1px solid; border-right:1px solid; }
+
+  .nd-nav-link{ position:relative; }
+  .nd-nav-link::after{
+    content:"";
+    position:absolute; left:0; bottom:-4px;
+    width:0%; height:1px;
+    background: var(--nd-brass);
+    transition: width 0.25s ease;
+  }
+  .nd-nav-link:hover::after{ width:100%; }
+
+  .nd-swatch{
+    height:110px;
+    border-radius:2px;
+    position:relative;
+    overflow:hidden;
+  }
+  .nd-swatch::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  .nd-work-card{ transition: transform 0.35s ease, box-shadow 0.35s ease; }
+  .nd-work-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6); }
+  .nd-work-dim{ opacity:0; transition: opacity 0.3s ease; }
+  .nd-work-card:hover .nd-work-dim{ opacity:1; }
+
+  .nd-field{
+    background: var(--nd-bg-soft);
+    border: 1px solid rgba(239,231,216,0.25);
+    color: var(--nd-paper);
+  }
+  .nd-field:focus{ outline:none; border-color: var(--nd-brass); }
+  .nd-field::placeholder{ color: rgba(166,156,141,0.7); }
+
+  .nd-cta{
+    background: var(--nd-brass);
+    color: var(--nd-ink);
+  }
+  .nd-cta:hover{ background: var(--nd-brass-bright); }
+
+  @media (prefers-reduced-motion: reduce){
+    .nd-work-card, .nd-work-dim, .nd-nav-link::after{ transition:none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="sticky top-0 z-40" style="background:rgba(27,23,20,0.92); backdrop-filter: blur(6px); border-bottom:1px solid var(--nd-line);">
+  <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="#" class="nd-display text-lg tracking-wide" style="color:var(--nd-paper)">Noé Duval</a>
+    <nav class="hidden md:flex items-center gap-10 text-sm nd-mono uppercase tracking-widest" style="color:var(--nd-muted)">
+      <a href="#pieces" class="nd-nav-link hover:text-white">Pièces</a>
+      <a href="#demarche" class="nd-nav-link hover:text-white">Démarche</a>
+      <a href="#matieres" class="nd-nav-link hover:text-white">Matières</a>
+      <a href="#contact" class="nd-nav-link hover:text-white">Contact</a>
+    </nav>
+    <a href="#contact" class="nd-cta text-xs nd-mono uppercase tracking-widest px-5 py-2.5 rounded-sm font-medium transition">Prendre rendez-vous</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-16 pb-24 grid md:grid-cols-2 gap-16 items-center">
+  <div>
+    <p class="nd-mono text-xs uppercase tracking-[0.25em] mb-5" style="color:var(--nd-brass)">Designer de mobilier — Atelier à Lyon</p>
+    <h1 class="nd-display font-semibold text-4xl sm:text-5xl leading-[1.1]" style="color:var(--nd-paper)">
+      Dessiner la matière<br>avant de la façonner.
+    </h1>
+    <p class="mt-6 text-sm leading-relaxed max-w-md" style="color:var(--nd-muted)">
+      Chaque pièce commence sur le papier : un tracé, une côte, une jonction pensée avant même que la scie ne touche le bois. Mobilier dessiné et fabriqué à la pièce, pour des intérieurs qui ne ressemblent qu'à eux-mêmes.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#pieces" class="nd-cta text-xs nd-mono uppercase tracking-widest px-6 py-3.5 rounded-sm font-medium transition">Voir les pièces</a>
+      <a href="#contact" class="text-xs nd-mono uppercase tracking-widest px-6 py-3.5 rounded-sm font-medium border transition hover:border-white" style="border-color: var(--nd-line); color:var(--nd-paper)">Discuter d'un projet</a>
+    </div>
+  </div>
+
+  <!-- SIGNATURE: technical line drawing of a chair, pinned like a drafting sheet -->
+  <div class="relative nd-crop" style="border:1px dashed var(--nd-line); padding:28px;">
+    <svg viewBox="0 0 520 500" class="w-full h-auto">
+      <!-- pins -->
+      <circle class="nd-pin" cx="20" cy="20" r="5"/>
+      <circle class="nd-pin" cx="500" cy="20" r="5"/>
+
+      <!-- backrest slats -->
+      <line class="nd-line-art" x1="220" y1="270" x2="210" y2="118" stroke-width="1.5"/>
+      <line class="nd-line-art" x1="280" y1="262" x2="270" y2="112" stroke-width="1.5"/>
+      <line class="nd-line-art" x1="330" y1="260" x2="320" y2="104" stroke-width="1.5"/>
+
+      <!-- backrest outer frame -->
+      <path class="nd-line-art" d="M200,290 L360,260 L350,100 L190,130 Z" stroke-width="2"/>
+
+      <!-- seat top -->
+      <path class="nd-line-art" d="M140,260 L300,230 L360,260 L200,290 Z" stroke-width="2"/>
+      <!-- seat front face -->
+      <path class="nd-line-art" d="M140,260 L300,230 L300,244 L140,274 Z" stroke-width="2"/>
+      <!-- seat right face -->
+      <path class="nd-line-art" d="M300,230 L360,260 L360,274 L300,244 Z" stroke-width="2"/>
+
+      <!-- front legs (visible, solid) -->
+      <line class="nd-line-art" x1="140" y1="274" x2="125" y2="430" stroke-width="2"/>
+      <line class="nd-line-art" x1="300" y1="244" x2="315" y2="430" stroke-width="2"/>
+      <!-- back legs (hidden, dashed) -->
+      <line class="nd-line-art" x1="200" y1="290" x2="215" y2="430" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line class="nd-line-art" x1="360" y1="274" x2="345" y2="430" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+      <!-- height dimension -->
+      <line class="nd-dim" x1="420" y1="100" x2="420" y2="430" stroke-width="1"/>
+      <line class="nd-dim" x1="412" y1="100" x2="428" y2="100" stroke-width="1"/>
+      <line class="nd-dim" x1="412" y1="430" x2="428" y2="430" stroke-width="1"/>
+      <text class="nd-dim-text nd-mono" x="440" y="270" font-size="13" transform="rotate(90 440 270)">H 86 CM</text>
+
+      <!-- width dimension -->
+      <line class="nd-dim" x1="125" y1="458" x2="345" y2="458" stroke-width="1"/>
+      <line class="nd-dim" x1="125" y1="450" x2="125" y2="466" stroke-width="1"/>
+      <line class="nd-dim" x1="345" y1="450" x2="345" y2="466" stroke-width="1"/>
+      <text class="nd-dim-text nd-mono" x="192" y="480" font-size="13">L 46 CM</text>
+
+      <!-- labels -->
+      <text class="nd-line-art nd-mono" fill="var(--nd-muted)" stroke="none" x="20" y="45" font-size="12">FIG. 00 — ÉTRAVE</text>
+      <text class="nd-line-art nd-mono" fill="var(--nd-muted)" stroke="none" x="420" y="45" font-size="12" text-anchor="end">ÉCH. 1:10</text>
+    </svg>
+  </div>
+</section>
+
+<!-- PIECES -->
+<section id="pieces" class="max-w-6xl mx-auto px-6 py-20 border-t" style="border-color:var(--nd-line)">
+  <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+    <div>
+      <p class="nd-mono text-xs uppercase tracking-[0.25em] mb-3" style="color:var(--nd-brass)">Planches</p>
+      <h2 class="nd-display font-semibold text-3xl" style="color:var(--nd-paper)">Pièces sélectionnées</h2>
+    </div>
+    <p class="text-sm max-w-sm" style="color:var(--nd-muted)">Quatre pièces récentes, dessinées puis façonnées à l'atelier, à l'unité ou en très petite série.</p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <!-- Fauteuil -->
+    <div class="nd-work-card nd-paper-panel rounded-sm p-6 relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-rust)">FIG. 01</p>
+      <svg viewBox="0 0 160 160" class="w-full h-32">
+        <path d="M40,60 L120,60 L120,140 L100,140 L100,80 L60,80 L60,140 L40,140 Z" fill="none" stroke="var(--nd-ink)" stroke-width="2"/>
+        <path d="M40,60 L40,20 L120,20 L120,60" fill="none" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="55" y1="30" x2="55" y2="55" stroke="var(--nd-ink)" stroke-width="1"/>
+        <line x1="80" y1="26" x2="80" y2="55" stroke="var(--nd-ink)" stroke-width="1"/>
+        <line x1="105" y1="30" x2="105" y2="55" stroke="var(--nd-ink)" stroke-width="1"/>
+      </svg>
+      <h3 class="nd-display font-semibold text-lg mt-4">Fauteuil « Étrave »</h3>
+      <p class="text-xs mt-1" style="color:#5b5346">Chêne massif, assise paille — 2025</p>
+      <p class="nd-work-dim nd-mono text-[11px] mt-3" style="color:var(--nd-rust)">H 86 · L 68 · P 74 CM</p>
+    </div>
+
+    <!-- Table -->
+    <div class="nd-work-card nd-paper-panel rounded-sm p-6 relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-rust)">FIG. 02</p>
+      <svg viewBox="0 0 160 160" class="w-full h-32">
+        <path d="M20,55 L140,55 L140,68 L20,68 Z" fill="none" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="30" y1="68" x2="30" y2="135" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="130" y1="68" x2="130" y2="135" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="45" y1="68" x2="45" y2="130" stroke="var(--nd-ink)" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <line x1="115" y1="68" x2="115" y2="130" stroke="var(--nd-ink)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      </svg>
+      <h3 class="nd-display font-semibold text-lg mt-4">Table « Plateau Continu »</h3>
+      <p class="text-xs mt-1" style="color:#5b5346">Noyer, plateau une lame — 2024</p>
+      <p class="nd-work-dim nd-mono text-[11px] mt-3" style="color:var(--nd-rust)">H 74 · L 220 · P 95 CM</p>
+    </div>
+
+    <!-- Buffet -->
+    <div class="nd-work-card nd-paper-panel rounded-sm p-6 relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-rust)">FIG. 03</p>
+      <svg viewBox="0 0 160 160" class="w-full h-32">
+        <rect x="25" y="55" width="110" height="70" fill="none" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="80" y1="55" x2="80" y2="125" stroke="var(--nd-ink)" stroke-width="1.2"/>
+        <line x1="25" y1="90" x2="135" y2="90" stroke="var(--nd-ink)" stroke-width="1.2"/>
+        <line x1="35" y1="125" x2="35" y2="140" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="125" y1="125" x2="125" y2="140" stroke="var(--nd-ink)" stroke-width="2"/>
+      </svg>
+      <h3 class="nd-display font-semibold text-lg mt-4">Buffet « Strate »</h3>
+      <p class="text-xs mt-1" style="color:#5b5346">Frêne teinté, laiton brossé — 2024</p>
+      <p class="nd-work-dim nd-mono text-[11px] mt-3" style="color:var(--nd-rust)">H 82 · L 160 · P 45 CM</p>
+    </div>
+
+    <!-- Console -->
+    <div class="nd-work-card nd-paper-panel rounded-sm p-6 relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-rust)">FIG. 04</p>
+      <svg viewBox="0 0 160 160" class="w-full h-32">
+        <line x1="20" y1="60" x2="140" y2="60" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="20" y1="60" x2="20" y2="135" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="140" y1="60" x2="140" y2="135" stroke="var(--nd-ink)" stroke-width="2"/>
+        <line x1="20" y1="100" x2="140" y2="100" stroke="var(--nd-ink)" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="45" y1="60" x2="30" y2="135" stroke="var(--nd-ink)" stroke-width="1"/>
+        <line x1="115" y1="60" x2="130" y2="135" stroke="var(--nd-ink)" stroke-width="1"/>
+      </svg>
+      <h3 class="nd-display font-semibold text-lg mt-4">Console « Fil »</h3>
+      <p class="text-xs mt-1" style="color:#5b5346">Acier noirci, tablette frêne — 2023</p>
+      <p class="nd-work-dim nd-mono text-[11px] mt-3" style="color:var(--nd-rust)">H 78 · L 130 · P 28 CM</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEMARCHE -->
+<section id="demarche" class="max-w-6xl mx-auto px-6 py-20 border-t" style="border-color:var(--nd-line)">
+  <p class="nd-mono text-xs uppercase tracking-[0.25em] mb-3" style="color:var(--nd-brass)">Feuillet de suivi</p>
+  <h2 class="nd-display font-semibold text-3xl mb-14" style="color:var(--nd-paper)">Du croquis à la pièce livrée</h2>
+
+  <div class="grid md:grid-cols-4 gap-8 relative">
+    <div class="hidden md:block absolute top-6 left-0 right-0 h-px" style="background: var(--nd-line);"></div>
+
+    <div class="relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-brass)">PL.01</p>
+      <h3 class="nd-display font-semibold text-lg mb-2">Croquis & côtes</h3>
+      <p class="text-sm leading-relaxed" style="color:var(--nd-muted)">Prise de mesures sur site, échanges sur l'usage réel de la pièce, premiers tracés à la main.</p>
+    </div>
+    <div class="relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-brass)">PL.02</p>
+      <h3 class="nd-display font-semibold text-lg mb-2">Maquette au 1:10</h3>
+      <p class="text-sm leading-relaxed" style="color:var(--nd-muted)">Volumes et proportions vérifiés en maquette avant toute coupe de bois définitive.</p>
+    </div>
+    <div class="relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-brass)">PL.03</p>
+      <h3 class="nd-display font-semibold text-lg mb-2">Prototype atelier</h3>
+      <p class="text-sm leading-relaxed" style="color:var(--nd-muted)">Assemblage test des jonctions, choix final des essences et des finitions.</p>
+    </div>
+    <div class="relative">
+      <p class="nd-mono text-xs mb-4" style="color:var(--nd-brass)">PL.04</p>
+      <h3 class="nd-display font-semibold text-lg mb-2">Façonnage & livraison</h3>
+      <p class="text-sm leading-relaxed" style="color:var(--nd-muted)">Fabrication de la pièce définitive, livraison et installation soignée chez vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MATIERES -->
+<section id="matieres" class="max-w-6xl mx-auto px-6 py-20 border-t" style="border-color:var(--nd-line)">
+  <p class="nd-mono text-xs uppercase tracking-[0.25em] mb-3" style="color:var(--nd-brass)">Légende</p>
+  <h2 class="nd-display font-semibold text-3xl mb-12" style="color:var(--nd-paper)">Matières de prédilection</h2>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div>
+      <div class="nd-swatch" style="background: linear-gradient(120deg, #C9A66B, #A9824F);"></div>
+      <p class="nd-mono text-xs mt-3" style="color:var(--nd-muted)">CHÊNE MASSIF</p>
+    </div>
+    <div>
+      <div class="nd-swatch" style="background: linear-gradient(120deg, #6B4226, #3E2717);"></div>
+      <p class="nd-mono text-xs mt-3" style="color:var(--nd-muted)">NOYER</p>
+    </div>
+    <div>
+      <div class="nd-swatch" style="background: linear-gradient(120deg, #D8CDB4, #B7AA8C);"></div>
+      <p class="nd-mono text-xs mt-3" style="color:var(--nd-muted)">FRÊNE</p>
+    </div>
+    <div>
+      <div class="nd-swatch" style="background: repeating-linear-gradient(100deg, #B08D46, #B08D46 3px, #96762F 3px, #96762F 6px);"></div>
+      <p class="nd-mono text-xs mt-3" style="color:var(--nd-muted)">LAITON BROSSÉ</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="border-t" style="border-color:var(--nd-line)">
+  <div class="max-w-3xl mx-auto px-6 py-20">
+    <p class="nd-mono text-xs uppercase tracking-[0.25em] mb-3" style="color:var(--nd-brass)">Feuillet de commande</p>
+    <h2 class="nd-display font-semibold text-3xl mb-3" style="color:var(--nd-paper)">Parlons de votre pièce</h2>
+    <p class="text-sm mb-10" style="color:var(--nd-muted)">Décrivez votre projet et son contexte ; une réponse personnelle sous 48h, avec les premières pistes de matière et de délai.</p>
+
+    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Nouvelle demande — Noé Duval, designer de mobilier">
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block nd-mono text-xs uppercase tracking-widest mb-2" style="color:var(--nd-muted)">Nom</label>
+          <input type="text" name="name" required placeholder="Camille Berthier" class="nd-field w-full px-4 py-3 rounded-sm text-sm">
+        </div>
+        <div>
+          <label class="block nd-mono text-xs uppercase tracking-widest mb-2" style="color:var(--nd-muted)">E-mail</label>
+          <input type="email" name="email" required placeholder="vous@exemple.fr" class="nd-field w-full px-4 py-3 rounded-sm text-sm">
+        </div>
+      </div>
+
+      <div>
+        <label class="block nd-mono text-xs uppercase tracking-widest mb-2" style="color:var(--nd-muted)">Type de pièce envisagée</label>
+        <select name="project_type" required class="nd-field w-full px-4 py-3 rounded-sm text-sm">
+          <option value="" disabled selected>Sélectionnez —</option>
+          <option>Table sur mesure</option>
+          <option>Fauteuil ou assise</option>
+          <option>Buffet, console ou rangement</option>
+          <option>Pièce d'exception / série limitée</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block nd-mono text-xs uppercase tracking-widest mb-2" style="color:var(--nd-muted)">Votre projet</label>
+        <textarea name="message" rows="4" required placeholder="Espace, dimensions approximatives, essence de bois envisagée, budget indicatif..." class="nd-field w-full px-4 py-3 rounded-sm text-sm resize-none"></textarea>
+      </div>
+
+      <button type="submit" class="nd-cta w-full py-4 rounded-sm nd-mono text-xs uppercase tracking-widest font-medium transition">Envoyer ma demande</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t px-6 py-8" style="border-color:var(--nd-line)">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="nd-display text-sm" style="color:var(--nd-paper)">Noé Duval</p>
+    <p class="nd-mono text-xs" style="color:var(--nd-muted)">© 2026 — Designer de mobilier, atelier à Lyon.</p>
+  </div>
+</footer>
+
+</body>
+</html>
