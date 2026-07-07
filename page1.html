@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iris Ducasse — Design de mobilier</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  :root{
+    --id-bg: #F4F1E9;
+    --id-panel: #FBF9F5;
+    --id-ink: #4A4038;
+    --id-muted: #8A8074;
+    --id-sage: #90A17E;
+    --id-sage-deep: #6F8161;
+    --id-blush: #D9A6A0;
+    --id-blush-deep: #C88883;
+    --id-line: rgba(74,64,56,0.12);
+  }
+  *{ box-sizing:border-box; }
+  body{
+    background: var(--id-bg);
+    color: var(--id-ink);
+    font-family:'Quicksand', sans-serif;
+  }
+  .id-display{ font-family:'Lora', serif; }
+  .id-script{ font-family:'Caveat', cursive; }
+
+  .id-pill-nav{
+    background: rgba(251,249,245,0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    box-shadow: 0 8px 30px -12px rgba(74,64,56,0.18);
+  }
+  .id-nav-link{ position:relative; }
+  .id-nav-link::after{
+    content:"";
+    position:absolute; left:50%; bottom:-3px;
+    width:0; height:2px; background: var(--id-blush);
+    transition: all 0.25s ease; transform: translateX(-50%);
+  }
+  .id-nav-link:hover::after{ width:60%; }
+
+  .id-blob{
+    border-radius: 62% 38% 55% 45% / 55% 45% 62% 38%;
+    background: linear-gradient(135deg, var(--id-sage) 0%, var(--id-blush) 100%);
+    opacity: 0.28;
+  }
+  @keyframes id-breathe{ 0%,100%{ transform: scale(1) rotate(0deg);} 50%{ transform: scale(1.04) rotate(2deg);} }
+  .id-breathe{ animation: id-breathe 7s ease-in-out infinite; }
+
+  .id-card{
+    background: var(--id-panel);
+    border-radius: 28px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 1px 2px rgba(74,64,56,0.06);
+  }
+  .id-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 24px 40px -20px rgba(74,64,56,0.25);
+  }
+
+  .id-tag{
+    display:inline-block;
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-weight:600;
+    letter-spacing: 0.02em;
+  }
+
+  .id-swatch{
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    position:relative;
+    box-shadow: inset 0 -8px 16px rgba(0,0,0,0.08);
+  }
+
+  .id-field{
+    background: var(--id-panel);
+    border: 1.5px solid var(--id-line);
+    color: var(--id-ink);
+    border-radius: 18px;
+  }
+  .id-field:focus{ outline:none; border-color: var(--id-sage); }
+  .id-field::placeholder{ color: var(--id-muted); }
+
+  .id-cta{
+    background: var(--id-sage);
+    color: #FBF9F5;
+    border-radius: 999px;
+  }
+  .id-cta:hover{ background: var(--id-sage-deep); }
+
+  .id-cta-outline{
+    border: 1.5px solid var(--id-ink);
+    color: var(--id-ink);
+    border-radius: 999px;
+  }
+  .id-cta-outline:hover{ background: var(--id-ink); color: var(--id-panel); }
+
+  .id-wave{ display:block; width:100%; height:36px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .id-breathe, .id-card, .id-nav-link::after{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<div class="sticky top-4 z-40 px-6">
+  <header class="id-pill-nav max-w-4xl mx-auto h-16 flex items-center justify-between px-6">
+    <a href="#" class="id-display font-semibold text-lg" style="color:var(--id-ink)">Iris Ducasse</a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium" style="color:var(--id-muted)">
+      <a href="#collections" class="id-nav-link hover:text-[var(--id-ink)]">Collections</a>
+      <a href="#approche" class="id-nav-link hover:text-[var(--id-ink)]">Approche</a>
+      <a href="#matieres" class="id-nav-link hover:text-[var(--id-ink)]">Matières</a>
+    </nav>
+    <a href="#contact" class="id-cta text-xs font-semibold px-5 py-2.5 transition">Me contacter</a>
+  </header>
+</div>
+
+<!-- HERO -->
+<section class="relative max-w-6xl mx-auto px-6 pt-20 pb-28 grid md:grid-cols-2 gap-16 items-center overflow-hidden">
+  <div class="relative z-10">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style="color:var(--id-blush-deep)">Design de mobilier</p>
+    <h1 class="id-display font-semibold text-4xl sm:text-5xl leading-[1.15]" style="color:var(--id-ink)">
+      Des formes qui<br>accueillent.
+    </h1>
+    <p class="mt-6 text-sm leading-relaxed max-w-md" style="color:var(--id-muted)">
+      Je dessine des assises et des meubles aux lignes rondes, pensés pour se laisser habiter : bouclé, lin lavé, bois clair. Du mobilier doux, à l'unité, pour des intérieurs où l'on respire.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#collections" class="id-cta text-sm font-semibold px-7 py-3.5 transition">Découvrir les collections</a>
+      <a href="#contact" class="id-cta-outline text-sm font-semibold px-7 py-3.5 transition">Un projet en tête ?</a>
+    </div>
+  </div>
+
+  <!-- SIGNATURE: soft blob + rounded sofa illustration -->
+  <div class="relative flex items-center justify-center">
+    <div class="id-blob id-breathe absolute w-[420px] h-[420px]"></div>
+    <svg viewBox="0 0 500 320" class="relative w-full max-w-md">
+      <ellipse cx="230" cy="248" rx="185" ry="16" fill="rgba(74,64,56,0.10)"/>
+      <path d="
+        M60,180
+        C60,140 92,118 122,132
+        C132,104 172,98 192,124
+        C212,98 252,98 272,124
+        C292,98 332,104 342,132
+        C372,118 404,140 404,180
+        L404,218
+        C404,234 388,240 372,234
+        L372,208
+        L92,208
+        L92,234
+        C92,240 76,234 60,218
+        Z"
+        fill="none" stroke="var(--id-ink)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M192,124 C198,150 198,175 192,206" fill="none" stroke="var(--id-ink)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <path d="M272,124 C266,150 266,175 272,206" fill="none" stroke="var(--id-ink)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="112" y1="234" x2="108" y2="256" stroke="var(--id-ink)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="352" y1="234" x2="356" y2="256" stroke="var(--id-ink)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="id-wave">
+  <path d="M0,20 C150,40 300,0 450,20 C600,40 750,0 900,20 C1050,40 1150,10 1200,20" fill="none" stroke="var(--id-line)" stroke-width="2"/>
+</svg>
+
+<!-- COLLECTIONS -->
+<section id="collections" class="max-w-6xl mx-auto px-6 py-16">
+  <div class="text-center max-w-xl mx-auto mb-14">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="color:var(--id-blush-deep)">Collections</p>
+    <h2 class="id-display font-semibold text-3xl" style="color:var(--id-ink)">Des pièces à câliner</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <div class="id-card p-6">
+      <svg viewBox="0 0 120 90" class="w-full h-20">
+        <circle cx="35" cy="55" r="26" fill="none" stroke="var(--id-ink)" stroke-width="2.5"/>
+        <circle cx="65" cy="45" r="22" fill="none" stroke="var(--id-ink)" stroke-width="2.5"/>
+        <circle cx="88" cy="58" r="18" fill="none" stroke="var(--id-ink)" stroke-width="2.5"/>
+      </svg>
+      <h3 class="id-display font-semibold text-lg mt-4" style="color:var(--id-ink)">Canapé « Nuage »</h3>
+      <span class="id-tag mt-3" style="background:#EAF0E4; color:var(--id-sage-deep)">Bouclé écru</span>
+    </div>
+
+    <div class="id-card p-6">
+      <svg viewBox="0 0 120 90" class="w-full h-20">
+        <path d="M25,70 C25,45 40,30 60,30 C80,30 95,45 95,70" fill="none" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="25" y1="70" x2="25" y2="55" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="95" y1="70" x2="95" y2="55" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <h3 class="id-display font-semibold text-lg mt-4" style="color:var(--id-ink)">Fauteuil « Câlin »</h3>
+      <span class="id-tag mt-3" style="background:#F5E5E2; color:var(--id-blush-deep)">Lin lavé</span>
+    </div>
+
+    <div class="id-card p-6">
+      <svg viewBox="0 0 120 90" class="w-full h-20">
+        <ellipse cx="60" cy="55" rx="38" ry="26" fill="none" stroke="var(--id-ink)" stroke-width="2.5"/>
+      </svg>
+      <h3 class="id-display font-semibold text-lg mt-4" style="color:var(--id-ink)">Pouf « Galet »</h3>
+      <span class="id-tag mt-3" style="background:#EFE9DD; color:#8A7A4E">Chêne clair</span>
+    </div>
+
+    <div class="id-card p-6">
+      <svg viewBox="0 0 120 90" class="w-full h-20">
+        <path d="M15,60 C30,40 45,75 60,55 C75,35 90,70 105,50" fill="none" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="20" y1="70" x2="20" y2="60" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="100" y1="70" x2="100" y2="55" stroke="var(--id-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <h3 class="id-display font-semibold text-lg mt-4" style="color:var(--id-ink)">Banquette « Vague »</h3>
+      <span class="id-tag mt-3" style="background:#EAF0E4; color:var(--id-sage-deep)">Bois flotté</span>
+    </div>
+
+  </div>
+</section>
+
+<svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="id-wave">
+  <path d="M0,20 C150,0 300,40 450,20 C600,0 750,40 900,20 C1050,0 1150,30 1200,20" fill="none" stroke="var(--id-line)" stroke-width="2"/>
+</svg>
+
+<!-- APPROCHE -->
+<section id="approche" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="text-center max-w-xl mx-auto mb-14">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="color:var(--id-blush-deep)">Approche</p>
+    <h2 class="id-display font-semibold text-3xl" style="color:var(--id-ink)">Une manière douce de travailler</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="text-center">
+      <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-4" style="background:#EAF0E4;">
+        <span class="id-script text-2xl" style="color:var(--id-sage-deep)">1</span>
+      </div>
+      <h3 class="font-semibold mb-2" style="color:var(--id-ink)">Écouter</h3>
+      <p class="text-sm" style="color:var(--id-muted)">Votre lieu, vos habitudes, l'usage réel de la pièce.</p>
+    </div>
+    <div class="text-center">
+      <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-4" style="background:#F5E5E2;">
+        <span class="id-script text-2xl" style="color:var(--id-blush-deep)">2</span>
+      </div>
+      <h3 class="font-semibold mb-2" style="color:var(--id-ink)">Esquisser</h3>
+      <p class="text-sm" style="color:var(--id-muted)">Des formes rondes, testées en petit avant de grandir.</p>
+    </div>
+    <div class="text-center">
+      <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-4" style="background:#EFE9DD;">
+        <span class="id-script text-2xl" style="color:#8A7A4E">3</span>
+      </div>
+      <h3 class="font-semibold mb-2" style="color:var(--id-ink)">Rembourrer</h3>
+      <p class="text-sm" style="color:var(--id-muted)">Mousses, garnissages et tissus choisis pour leur toucher.</p>
+    </div>
+    <div class="text-center">
+      <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-4" style="background:#EAF0E4;">
+        <span class="id-script text-2xl" style="color:var(--id-sage-deep)">4</span>
+      </div>
+      <h3 class="font-semibold mb-2" style="color:var(--id-ink)">Installer</h3>
+      <p class="text-sm" style="color:var(--id-muted)">Livraison et mise en place chez vous, avec soin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MATIERES -->
+<section id="matieres" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="text-center max-w-xl mx-auto mb-14">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="color:var(--id-blush-deep)">Matières</p>
+    <h2 class="id-display font-semibold text-3xl" style="color:var(--id-ink)">Ce qui se touche autant que ça se voit</h2>
+  </div>
+
+  <div class="flex flex-wrap justify-center gap-10">
+    <div class="text-center">
+      <div class="id-swatch mx-auto" style="background: radial-gradient(circle at 35% 30%, #FBF9F5, #E4E0D2);"></div>
+      <p class="text-xs font-semibold mt-3" style="color:var(--id-muted)">Bouclé écru</p>
+    </div>
+    <div class="text-center">
+      <div class="id-swatch mx-auto" style="background: radial-gradient(circle at 35% 30%, #E8E2D3, #C9BFA5);"></div>
+      <p class="text-xs font-semibold mt-3" style="color:var(--id-muted)">Lin lavé</p>
+    </div>
+    <div class="text-center">
+      <div class="id-swatch mx-auto" style="background: radial-gradient(circle at 35% 30%, #E9C9A6, #C79F6C);"></div>
+      <p class="text-xs font-semibold mt-3" style="color:var(--id-muted)">Chêne clair</p>
+    </div>
+    <div class="text-center">
+      <div class="id-swatch mx-auto" style="background: radial-gradient(circle at 35% 30%, #E7C9A0, #B98A4E);"></div>
+      <p class="text-xs font-semibold mt-3" style="color:var(--id-muted)">Laiton doux</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="max-w-3xl mx-auto px-6 py-16 text-center">
+  <p class="id-script text-3xl leading-relaxed" style="color:var(--id-ink)">
+    « On a l'impression que le canapé nous a été fait sur mesure, presque comme une seconde peau du salon. »
+  </p>
+  <p class="text-xs font-semibold mt-4 uppercase tracking-widest" style="color:var(--id-muted)">Une cliente, Bordeaux</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="px-6 py-20">
+  <div class="max-w-2xl mx-auto id-card p-10">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-3" style="color:var(--id-blush-deep)">Contact</p>
+    <h2 class="id-display font-semibold text-3xl mb-3" style="color:var(--id-ink)">On imagine votre pièce ?</h2>
+    <p class="text-sm mb-8" style="color:var(--id-muted)">Racontez-moi votre espace et votre envie, je reviens vers vous avec plaisir, sous 48h.</p>
+
+    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Nouvelle demande — Iris Ducasse, design de mobilier">
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <input type="text" name="name" required placeholder="Votre prénom" class="id-field w-full px-4 py-3 text-sm">
+        <input type="email" name="email" required placeholder="Votre e-mail" class="id-field w-full px-4 py-3 text-sm">
+      </div>
+
+      <select name="project_type" required class="id-field w-full px-4 py-3 text-sm">
+        <option value="" disabled selected>Quel type de pièce ? —</option>
+        <option>Canapé ou banquette</option>
+        <option>Fauteuil</option>
+        <option>Pouf ou petite assise</option>
+        <option>Autre envie</option>
+      </select>
+
+      <textarea name="message" rows="4" required placeholder="Parlez-moi de votre pièce, ses dimensions, l'ambiance que vous cherchez..." class="id-field w-full px-4 py-3 text-sm resize-none"></textarea>
+
+      <button type="submit" class="id-cta w-full py-3.5 text-sm font-semibold transition">Envoyer avec plaisir</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="px-6 py-8 border-t" style="border-color:var(--id-line)">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="id-display text-sm" style="color:var(--id-ink)">Iris Ducasse</p>
+    <p class="text-xs" style="color:var(--id-muted)">© 2026 — Design de mobilier, tout en douceur.</p>
+  </div>
+</footer>
+
+</body>
+</html>
